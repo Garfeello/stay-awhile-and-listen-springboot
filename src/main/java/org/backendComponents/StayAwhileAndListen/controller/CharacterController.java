@@ -29,6 +29,7 @@ public class CharacterController {
         Diablo2Character diablo2Character = new Diablo2Character();
         diablo2Character.setDescription("description");
         diablo2Character.setName("TROLOLO");
+        System.out.println("AA");
         return diablo2Character;
     }
 }
