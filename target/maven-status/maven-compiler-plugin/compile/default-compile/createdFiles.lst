@@ -1,0 +1,8 @@
+org/backendComponents/StayAwhileAndListen/appConfig/AppConfig.class
+org/backendComponents/StayAwhileAndListen/StayAwhileAndListenApplication.class
+org/backendComponents/StayAwhileAndListen/repository/Diablo2CharacterRepository.class
+org/backendComponents/StayAwhileAndListen/model/Diablo2Quotes.class
+org/backendComponents/StayAwhileAndListen/controller/CharacterController.class
+org/backendComponents/StayAwhileAndListen/repository/Diablo2QuotesRepository.class
+org/backendComponents/StayAwhileAndListen/controller/QuotesController.class
+org/backendComponents/StayAwhileAndListen/model/Diablo2Character.class

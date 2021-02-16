@@ -10,7 +10,6 @@
     </parent>
     <groupId>org.backendComponents</groupId>
     <artifactId>stay_awhile_and_listen</artifactId>
-    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>StayAwhileAndListen</name>
     <description>Stay awhile and listen project for D2 quotes</description>
