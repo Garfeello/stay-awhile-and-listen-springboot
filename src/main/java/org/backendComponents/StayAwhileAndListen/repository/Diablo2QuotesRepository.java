@@ -12,4 +12,6 @@ public interface Diablo2QuotesRepository extends JpaRepository<Diablo2Quotes, Lo
 
     Optional<List<Diablo2Quotes>> findAllByDiablo2Character(Diablo2Character diablo2Character);
 
+    Optional<Diablo2Quotes> findFirstByName(String name);
+
 }

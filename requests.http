@@ -1,0 +1,26 @@
+POST localhost:8888/stayAwhileAndListen/quotes/addQuote
+Content-Type: application/json
+
+{
+  "name": "Samwise 321312",
+  "diablo2Character": {
+    "name": "Big dsadasdasdccxzcxxzc"
+  }
+}
+
+###
+DELETE http://localhost:8888/stayAwhileAndListen/quotes/deleteQuote/12
+
+###
+GET http://localhost:8888/stayAwhileAndListen/quotes/getQuote/Samwise Gumdzi
+
+###
+PUT http://localhost:8888/stayAwhileAndListen/quotes/editQuote/13
+Content-Type: application/json
+
+{
+  "name": "Testowy Samwise Gamdzej numer 6321",
+  "diablo2Character": {
+    "name": "Big dsadasdasdccxzcxxzc"
+  }
+}

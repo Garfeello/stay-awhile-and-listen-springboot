@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface Diablo2CharacterRepository extends JpaRepository<Diablo2Character, Long>, CrudRepository<Diablo2Character, Long> {
 
-    Optional<Diablo2Character> findDiablo2CharacterByName(String name);
+    Optional<Diablo2Character> findFirstByName(String name);
 
 }

@@ -16,7 +16,7 @@ public class Diablo2Quotes {
     @Column(columnDefinition = "mediumblob")
     private byte[] quote;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Diablo2Character diablo2Character;
 
     public Long getId() {

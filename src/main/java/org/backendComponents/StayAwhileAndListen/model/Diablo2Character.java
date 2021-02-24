@@ -1,6 +1,7 @@
 package org.backendComponents.StayAwhileAndListen.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -9,9 +10,13 @@ public class Diablo2Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty
     private String name;
+
     private String description;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Diablo2Quotes> diablo2Quotes;
 
     public Long getId() {

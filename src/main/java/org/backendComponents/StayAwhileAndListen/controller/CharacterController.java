@@ -24,6 +24,11 @@ public class CharacterController {
         return diablo2QuotesRepository.findAll().stream().sorted().collect(Collectors.toList());
     }
 
+    @PostMapping("/addCharacter")
+    private Diablo2Character addCharacter(){
+        return new Diablo2Character();
+    }
+
     @GetMapping("/test")
     private Diablo2Character test() {
         Diablo2Character diablo2Character = new Diablo2Character();
