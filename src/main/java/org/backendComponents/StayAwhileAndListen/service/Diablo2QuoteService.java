@@ -33,5 +33,4 @@ public class Diablo2QuoteService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 Character not found")));
         return diablo2Quote;
     }
-
 }

@@ -1,40 +1,56 @@
 package org.backendComponents.StayAwhileAndListen.controller;
 
 import org.backendComponents.StayAwhileAndListen.model.Diablo2Character;
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Quotes;
-import org.backendComponents.StayAwhileAndListen.repository.Diablo2QuotesRepository;
+import org.backendComponents.StayAwhileAndListen.repository.Diablo2CharacterRepository;
+import org.backendComponents.StayAwhileAndListen.service.Diablo2CharacterService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/character")
 @CrossOrigin(origins = "http://localhost:3000")
 public class CharacterController {
 
-    private final Diablo2QuotesRepository diablo2QuotesRepository;
+    private final Diablo2CharacterRepository characterRepository;
+    private final Diablo2CharacterService characterService;
 
-    public CharacterController(Diablo2QuotesRepository diablo2QuotesRepository) {
-        this.diablo2QuotesRepository = diablo2QuotesRepository;
+    public CharacterController(Diablo2CharacterRepository diablo2CharacterRepository, Diablo2CharacterService diablo2CharacterService) {
+        this.characterRepository = diablo2CharacterRepository;
+        this.characterService = diablo2CharacterService;
     }
 
-    @ModelAttribute("diablo2AllQuotes")
-    private List<Diablo2Quotes> diablo2Quotes() {
-        return diablo2QuotesRepository.findAll().stream().sorted().collect(Collectors.toList());
+    @GetMapping("/allCharacters")
+    private List<Diablo2Character> getAllCharacters() {
+        return characterRepository.findAll();
     }
 
     @PostMapping("/addCharacter")
-    private Diablo2Character addCharacter(){
-        return new Diablo2Character();
+    private Diablo2Character addQuote(@RequestBody Diablo2Character diablo2Character) {
+        characterService.ifCharacterExsistsThrowEx(diablo2Character);
+        return characterRepository.save(diablo2Character);
     }
 
-    @GetMapping("/test")
-    private Diablo2Character test() {
-        Diablo2Character diablo2Character = new Diablo2Character();
-        diablo2Character.setDescription("description");
-        diablo2Character.setName("TROLOLO");
-        System.out.println("AA");
-        return diablo2Character;
+    @GetMapping("/getCharacter/{name}")
+    private Diablo2Character getQuoteByName(@PathVariable String name) {
+        return characterRepository.findFirstByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 character not found"));
+    }
+
+    @PutMapping("/editCharacter/{id}")
+    private Diablo2Character updateDiablo2Quote(@RequestBody Diablo2Character diablo2Character, @PathVariable Long id) {
+        Diablo2Character currentCharacter = characterService.findDiablo2CharacterOrThrowEx(id);
+        currentCharacter.setName(diablo2Character.getName());
+        currentCharacter.setDescription(diablo2Character.getDescription());
+        currentCharacter.setDiablo2Quotes(diablo2Character.getDiablo2Quotes());
+        return characterRepository.save(currentCharacter);
+    }
+
+    @DeleteMapping("/deleteCharacter/{id}")
+    private ResponseEntity<String> removeQuoteById(@PathVariable Long id) {
+        characterRepository.deleteById(characterService.findDiablo2CharacterOrThrowEx(id).getId());
+        return ResponseEntity.ok("Deleted quote with id: " + id);
     }
 }

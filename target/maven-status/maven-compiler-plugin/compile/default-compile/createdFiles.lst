@@ -4,5 +4,8 @@ org/backendComponents/StayAwhileAndListen/repository/Diablo2CharacterRepository.
 org/backendComponents/StayAwhileAndListen/model/Diablo2Quotes.class
 org/backendComponents/StayAwhileAndListen/controller/CharacterController.class
 org/backendComponents/StayAwhileAndListen/repository/Diablo2QuotesRepository.class
+org/backendComponents/StayAwhileAndListen/controller/Mp3FileController.class
 org/backendComponents/StayAwhileAndListen/controller/QuotesController.class
+org/backendComponents/StayAwhileAndListen/service/Mp3SaveService.class
+org/backendComponents/StayAwhileAndListen/service/Diablo2QuoteService.class
 org/backendComponents/StayAwhileAndListen/model/Diablo2Character.class

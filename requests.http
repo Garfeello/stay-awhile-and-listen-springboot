@@ -1,3 +1,5 @@
+### QUOTE
+
 POST localhost:8888/stayAwhileAndListen/quotes/addQuote
 Content-Type: application/json
 
@@ -24,3 +26,31 @@ Content-Type: application/json
     "name": "Big dsadasdasdccxzcxxzc"
   }
 }
+
+### CHARACTER
+
+GET http://localhost:8888/stayAwhileAndListen/character/allCharacters
+
+###
+POST http://localhost:8888/stayAwhileAndListen/character/addCharacter
+Content-Type: application/json
+
+{
+  "name": "Izual",
+  "description": "Izual was once an angel in service to the High Heavens[1], and served as the most trusted lieutenant of Tyrael during the Great Conflict."
+}
+
+###
+GET http://localhost:8888/stayAwhileAndListen/character/getCharacter/IZUALLO
+
+###
+PUT http://localhost:8888/stayAwhileAndListen/character/editCharacter/21
+Content-Type: application/json
+
+{
+  "name": "Izual",
+  "description": "Izual was once an angel in service to the High Heavens, and served as the most trusted lieutenant of Tyrael during the Great Conflict."
+}
+
+###
+DELETE http://localhost:8888/stayAwhileAndListen/character/deleteCharacter/20
