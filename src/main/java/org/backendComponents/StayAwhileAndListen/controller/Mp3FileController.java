@@ -4,12 +4,14 @@ import org.backendComponents.StayAwhileAndListen.repository.Diablo2QuotesReposit
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
-@Controller("/stayAwhileAndListen/audio")
+@Controller
+@RequestMapping("/stayAwhileAndListen/audio")
 public class Mp3FileController {
 
     private final Diablo2QuotesRepository quotesRepository;

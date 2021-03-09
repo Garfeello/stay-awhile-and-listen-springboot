@@ -1,5 +1,8 @@
 ### QUOTE
 
+GET http://localhost:8888/stayAwhileAndListen/quotes/allQuotes
+
+###
 POST localhost:8888/stayAwhileAndListen/quotes/addQuote
 Content-Type: application/json
 
@@ -14,7 +17,7 @@ Content-Type: application/json
 DELETE http://localhost:8888/stayAwhileAndListen/quotes/deleteQuote/12
 
 ###
-GET http://localhost:8888/stayAwhileAndListen/quotes/getQuote/Samwise Gumdzi
+GET http://localhost:8888/stayAwhileAndListen/quotes/getQuote/Oh shit.mp3
 
 ###
 PUT http://localhost:8888/stayAwhileAndListen/quotes/editQuote/13

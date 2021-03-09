@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/quotes")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuotesController {
 
     private final Diablo2QuotesRepository quotesRepository;
