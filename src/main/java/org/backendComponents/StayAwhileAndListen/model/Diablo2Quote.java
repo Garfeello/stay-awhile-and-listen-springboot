@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
-public class Diablo2Quotes {
+public class Diablo2Quote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +53,7 @@ public class Diablo2Quotes {
 
     @Override
     public String toString() {
-        return "Diablo2Quotes{" +
+        return "Diablo2Quote{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", quote=" + Arrays.toString(quote) +

@@ -22,7 +22,9 @@ public class Diablo2CharacterService {
     }
 
     public Diablo2Character findDiablo2CharacterOrThrowEx(Long id) {
-        return diablo2CharacterRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 character not found"));
+        return diablo2CharacterRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 character not found"));
     }
 
 }
