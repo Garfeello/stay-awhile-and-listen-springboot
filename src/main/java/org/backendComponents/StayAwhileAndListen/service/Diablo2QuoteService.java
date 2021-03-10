@@ -1,7 +1,7 @@
 package org.backendComponents.StayAwhileAndListen.service;
 
 import org.backendComponents.StayAwhileAndListen.model.Diablo2Character;
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Quote;
+import org.backendComponents.StayAwhileAndListen.model.Diablo2Quotes;
 import org.backendComponents.StayAwhileAndListen.repository.Diablo2CharacterRepository;
 import org.backendComponents.StayAwhileAndListen.repository.Diablo2QuotesRepository;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class Diablo2QuoteService {
         }
     }
 
-    public Diablo2Quote findDiablo2QuoteOrThrowEx(Long id) {
+    public Diablo2Quotes findDiablo2QuoteOrThrowEx(Long id) {
         return diablo2QuotesRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 quote not found"));

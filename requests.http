@@ -44,7 +44,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8888/stayAwhileAndListen/character/getCharacter/IZUALLO
+GET http://localhost:8888/stayAwhileAndListen/character/getCharacter/Akara
 
 ###
 PUT http://localhost:8888/stayAwhileAndListen/character/editCharacter/21

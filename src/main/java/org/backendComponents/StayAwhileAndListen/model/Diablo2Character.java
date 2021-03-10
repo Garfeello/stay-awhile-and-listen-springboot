@@ -17,7 +17,7 @@ public class Diablo2Character {
     private String description;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Diablo2Quote> diablo2Quotes;
+    private List<Diablo2Quotes> diablo2Quotes;
 
     public Long getId() {
         return id;
@@ -43,11 +43,11 @@ public class Diablo2Character {
         this.description = description;
     }
 
-    public List<Diablo2Quote> getDiablo2Quotes() {
+    public List<Diablo2Quotes> getDiablo2Quotes() {
         return diablo2Quotes;
     }
 
-    public void setDiablo2Quotes(List<Diablo2Quote> diablo2Quotes) {
+    public void setDiablo2Quotes(List<Diablo2Quotes> diablo2Quotes) {
         this.diablo2Quotes = diablo2Quotes;
     }
 
