@@ -8,7 +8,7 @@ import java.io.IOException;
 @Service
 public class Mp3SaveService {
 
-    public byte[] getMp3File(MultipartFile file) {
+    public byte[] getMpegBlob(MultipartFile file) {
         try {
             return file.getBytes();
         } catch (IOException e) {

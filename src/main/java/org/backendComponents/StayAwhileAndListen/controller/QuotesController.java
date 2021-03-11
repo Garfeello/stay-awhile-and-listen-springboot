@@ -1,6 +1,5 @@
 package org.backendComponents.StayAwhileAndListen.controller;
 
-import org.backendComponents.StayAwhileAndListen.dto.Diablo2QuoteDTO;
 import org.backendComponents.StayAwhileAndListen.model.Diablo2Quotes;
 import org.backendComponents.StayAwhileAndListen.repository.Diablo2QuotesRepository;
 import org.backendComponents.StayAwhileAndListen.service.Diablo2QuoteService;
@@ -8,6 +7,7 @@ import org.backendComponents.StayAwhileAndListen.service.Mp3SaveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -32,13 +32,13 @@ public class QuotesController {
         return quotesRepository.getAllQuotes();
     }
 
-    @PostMapping("/addQuote")
-    private Diablo2Quotes addQuote(@RequestBody Diablo2QuoteDTO diablo2QuoteDTO) {
-        quoteService.ifQuoteExsistsThrowEx(diablo2QuoteDTO.getMultipartFile().getName());
+    @PostMapping(value = "/addQuote")
+    private Diablo2Quotes test(@RequestParam MultipartFile mpegFile, @RequestParam String characterName){
+        quoteService.ifQuoteExsistsThrowEx(mpegFile.getOriginalFilename());
         Diablo2Quotes diablo2Quotes = new Diablo2Quotes();
-        diablo2Quotes.setName(diablo2QuoteDTO.getMultipartFile().getName());
-        diablo2Quotes.setQuote(mp3SaveService.getMp3File(diablo2QuoteDTO.getMultipartFile()));
-        diablo2Quotes.setDiablo2Character(quoteService.setQuoteCharacterIfExsists(diablo2QuoteDTO.getDiablo2Character()));
+        diablo2Quotes.setName(mpegFile.getOriginalFilename());
+        diablo2Quotes.setQuote(mp3SaveService.getMpegBlob(mpegFile));
+        diablo2Quotes.setDiablo2Character(quoteService.setQuoteCharacterIfExsists(characterName));
         return quotesRepository.save(diablo2Quotes);
     }
 

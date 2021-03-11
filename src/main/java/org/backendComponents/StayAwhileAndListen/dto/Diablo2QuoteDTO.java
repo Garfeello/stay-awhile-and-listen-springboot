@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Diablo2QuoteDTO {
 
     private String name;
-    private MultipartFile multipartFile;
+    private MultipartFile quote;
     private Diablo2Character diablo2Character;
 
     public String getName() {
@@ -19,12 +19,12 @@ public class Diablo2QuoteDTO {
         this.name = name;
     }
 
-    public MultipartFile getMultipartFile() {
-        return multipartFile;
+    public MultipartFile getQuote() {
+        return quote;
     }
 
-    public void setMultipartFile(MultipartFile multipartFile) {
-        this.multipartFile = multipartFile;
+    public void setQuote(MultipartFile quote) {
+        this.quote = quote;
     }
 
     public Diablo2Character getDiablo2Character() {
@@ -39,7 +39,7 @@ public class Diablo2QuoteDTO {
     public String toString() {
         return "Diablo2QuoteDTO{" +
                 "name='" + name + '\'' +
-                ", multipartFile=" + multipartFile +
+                ", quote=" + quote +
                 ", diablo2Character=" + diablo2Character +
                 '}';
     }

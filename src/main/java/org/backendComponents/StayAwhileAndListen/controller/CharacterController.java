@@ -44,7 +44,6 @@ public class CharacterController {
         Diablo2Character currentCharacter = characterService.findDiablo2CharacterOrThrowEx(id);
         currentCharacter.setName(diablo2Character.getName());
         currentCharacter.setDescription(diablo2Character.getDescription());
-        currentCharacter.setDiablo2Quotes(diablo2Character.getDiablo2Quotes());
         return characterRepository.save(currentCharacter);
     }
 

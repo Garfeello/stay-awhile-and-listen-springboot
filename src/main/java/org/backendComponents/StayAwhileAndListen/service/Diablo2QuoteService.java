@@ -31,9 +31,9 @@ public class Diablo2QuoteService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 quote not found"));
     }
 
-    public Diablo2Character setQuoteCharacterIfExsists(Diablo2Character diablo2Character) {
+    public Diablo2Character setQuoteCharacterIfExsists(String characterName) {
         return diablo2CharacterRepository
-                .findFirstByName(diablo2Character.getName())
+                .findFirstByName(characterName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 Character not found"));
     }
 }
