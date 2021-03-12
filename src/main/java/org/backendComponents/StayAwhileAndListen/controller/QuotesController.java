@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -27,19 +28,25 @@ public class QuotesController {
         this.mp3SaveService = mp3SaveService;
     }
 
-    @GetMapping("/allQuotes")
-    private List<Diablo2Quotes> getAllQuotes() {
-        return quotesRepository.getAllQuotes();
+    @GetMapping("/getRandomDailyQuote/{dayInformation}")
+    private Diablo2Quotes getRandomQuoteForDay(@PathVariable int dayInformation) {
+        return quoteService.getRandomQuoteIfNewDay(dayInformation);
     }
 
+    @GetMapping("/allQuotes")
+    private List<Diablo2Quotes> getAllQuotes() {
+        return quotesRepository.getAllQuotes().orElse(Collections.emptyList());
+    }
+
+    //CRUD
     @PostMapping(value = "/addQuote")
-    private Diablo2Quotes test(@RequestParam MultipartFile mpegFile, @RequestParam String characterName){
+    private Diablo2Quotes test(@RequestParam MultipartFile mpegFile, @RequestParam String characterName) {
         quoteService.ifQuoteExsistsThrowEx(mpegFile.getOriginalFilename());
-        Diablo2Quotes diablo2Quotes = new Diablo2Quotes();
-        diablo2Quotes.setName(mpegFile.getOriginalFilename());
-        diablo2Quotes.setQuote(mp3SaveService.getMpegBlob(mpegFile));
-        diablo2Quotes.setDiablo2Character(quoteService.setQuoteCharacterIfExsists(characterName));
-        return quotesRepository.save(diablo2Quotes);
+        Diablo2Quotes diablo2Quote = new Diablo2Quotes();
+        diablo2Quote.setName(mpegFile.getOriginalFilename());
+        diablo2Quote.setQuote(mp3SaveService.getMpegBlob(mpegFile));
+        diablo2Quote.setDiablo2Character(quoteService.setQuoteIfCharacterExsists(characterName));
+        return quotesRepository.save(diablo2Quote);
     }
 
     @GetMapping("/getQuote/{name}")

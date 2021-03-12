@@ -10,10 +10,8 @@ import java.util.Optional;
 
 public interface Diablo2QuotesRepository extends JpaRepository<Diablo2Quotes, Long>, CrudRepository<Diablo2Quotes, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM diablo2quotes")
-    List<Diablo2Quotes> getAllQuotes();
-
-    Diablo2Quotes getFirstById(Long id);
+    @Query(value = "SELECT d FROM Diablo2Quotes d ")
+    Optional<List<Diablo2Quotes>> getAllQuotes();
 
     Optional<Diablo2Quotes> findFirstByName(String name);
 }

@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class Diablo2QuoteService {
 
@@ -31,9 +34,23 @@ public class Diablo2QuoteService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 quote not found"));
     }
 
-    public Diablo2Character setQuoteCharacterIfExsists(String characterName) {
+    public Diablo2Character setQuoteIfCharacterExsists(String characterName) {
         return diablo2CharacterRepository
                 .findFirstByName(characterName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 Character not found"));
+    }
+
+    public Diablo2Quotes getRandomQuoteIfNewDay(int dayInformation) {
+        int currentDay = 0;
+        Diablo2Quotes diablo2Quotes = new Diablo2Quotes();
+        if (currentDay != dayInformation){
+            diablo2Quotes = getRandomQuote();
+        }
+        return diablo2Quotes;
+    }
+
+    private Diablo2Quotes getRandomQuote(){
+        List<Diablo2Quotes> allQuotes = diablo2QuotesRepository.getAllQuotes().orElse(Collections.emptyList());
+        return allQuotes.get((int) (Math.random() * allQuotes.size()));
     }
 }
