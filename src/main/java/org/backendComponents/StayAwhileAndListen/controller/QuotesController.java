@@ -28,9 +28,14 @@ public class QuotesController {
         this.mp3SaveService = mp3SaveService;
     }
 
-    @GetMapping("/getRandomDailyQuote/{dayInformation}")
-    private Diablo2Quotes getRandomQuoteForDay(@PathVariable int dayInformation) {
-        return quoteService.getRandomQuoteIfNewDay(dayInformation);
+    @GetMapping("/randomQuote")
+    private Diablo2Quotes getRandomQuote(){
+        return quoteService.getRandomQuote();
+    }
+
+    @GetMapping("/getRandomDailyQuote/{currentDayInformation}")
+    private Diablo2Quotes getRandomQuoteForDay(@PathVariable int currentDayInformation) {
+        return quoteService.getRandomQuoteIfNewDay(currentDayInformation);
     }
 
     @GetMapping("/allQuotes")

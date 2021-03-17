@@ -49,7 +49,7 @@ public class Diablo2QuoteService {
         return diablo2Quotes;
     }
 
-    private Diablo2Quotes getRandomQuote(){
+    public Diablo2Quotes getRandomQuote(){
         List<Diablo2Quotes> allQuotes = diablo2QuotesRepository.getAllQuotes().orElse(Collections.emptyList());
         return allQuotes.get((int) (Math.random() * allQuotes.size()));
     }
