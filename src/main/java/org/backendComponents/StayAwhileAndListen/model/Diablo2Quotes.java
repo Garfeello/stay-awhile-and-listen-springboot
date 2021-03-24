@@ -1,6 +1,7 @@
 package org.backendComponents.StayAwhileAndListen.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @Entity
@@ -19,6 +20,10 @@ public class Diablo2Quotes {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Diablo2Character diablo2Character;
 
+    private LocalDate daily;
+
+    private Boolean favourite;
+
     public Long getId() {
         return id;
     }
@@ -35,6 +40,14 @@ public class Diablo2Quotes {
         this.name = name;
     }
 
+    public byte[] getQuote() {
+        return quote;
+    }
+
+    public void setQuote(byte[] quote) {
+        this.quote = quote;
+    }
+
     public Diablo2Character getDiablo2Character() {
         return diablo2Character;
     }
@@ -43,12 +56,20 @@ public class Diablo2Quotes {
         this.diablo2Character = diablo2Character;
     }
 
-    public byte[] getQuote() {
-        return quote;
+    public LocalDate getDaily() {
+        return daily;
     }
 
-    public void setQuote(byte[] quote) {
-        this.quote = quote;
+    public void setDaily(LocalDate daily) {
+        this.daily = daily;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
     }
 
     @Override
@@ -58,6 +79,8 @@ public class Diablo2Quotes {
                 ", name='" + name + '\'' +
                 ", quote=" + Arrays.toString(quote) +
                 ", diablo2Character=" + diablo2Character +
+                ", daily=" + daily +
+                ", favourite=" + favourite +
                 '}';
     }
 }

@@ -35,7 +35,7 @@ public class QuotesController {
 
     @GetMapping("/getRandomDailyQuote/{currentDayInformation}")
     private Diablo2Quotes getRandomQuoteForDay(@PathVariable int currentDayInformation) {
-        return quoteService.getRandomQuoteIfNewDay(currentDayInformation);
+        return quoteService.getDailyQuote(currentDayInformation);
     }
 
     @GetMapping("/allQuotes")
@@ -43,30 +43,31 @@ public class QuotesController {
         return quotesRepository.getAllQuotes().orElse(Collections.emptyList());
     }
 
+    @GetMapping("/setFavouriteQuote/{id}")
+    private void setFavouriteQuote(@PathVariable Long id){
+        Diablo2Quotes diablo2Quotes = quoteService.findDiablo2QuoteOrThrowEx(id);
+        diablo2Quotes.setFavourite(!diablo2Quotes.getFavourite());
+        quotesRepository.save(diablo2Quotes);
+    }
+
     //CRUD
     @PostMapping(value = "/addQuote")
     private Diablo2Quotes test(@RequestParam MultipartFile mpegFile, @RequestParam String characterName) {
-        quoteService.ifQuoteExsistsThrowEx(mpegFile.getOriginalFilename());
+        quoteService.ifQuoteMpegExsistsThrowEx(mpegFile.getOriginalFilename());
         Diablo2Quotes diablo2Quote = new Diablo2Quotes();
         diablo2Quote.setName(mpegFile.getOriginalFilename());
         diablo2Quote.setQuote(mp3SaveService.getMpegBlob(mpegFile));
         diablo2Quote.setDiablo2Character(quoteService.setQuoteIfCharacterExsists(characterName));
+        diablo2Quote.setFavourite(false);
         return quotesRepository.save(diablo2Quote);
     }
 
-    @GetMapping("/getQuote/{name}")
-    private Diablo2Quotes getQuoteByName(@PathVariable String name) {
-        return quotesRepository.findFirstByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 quote not found"));
+    @GetMapping("/getQuote/{id}")
+    private Diablo2Quotes getQuoteByName(@PathVariable Long id) {
+        return quotesRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 quote not found"));
     }
 
-    @PutMapping("/editQuote/{id}")
-    private Diablo2Quotes updateDiablo2Quote(@RequestBody Diablo2Quotes diablo2Quotes, @PathVariable Long id) {
-        Diablo2Quotes currentQuote = quoteService.findDiablo2QuoteOrThrowEx(id);
-        currentQuote.setName(diablo2Quotes.getName());
-        currentQuote.setQuote(diablo2Quotes.getQuote());
-        currentQuote.setDiablo2Character(diablo2Quotes.getDiablo2Character());
-        return quotesRepository.save(currentQuote);
-    }
+    // in this case edit is quite redundant
 
     @DeleteMapping("/deleteQuote/{id}")
     private ResponseEntity<String> removeQuoteById(@PathVariable Long id) {

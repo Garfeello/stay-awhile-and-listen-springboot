@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class Diablo2QuoteService {
@@ -22,7 +22,7 @@ public class Diablo2QuoteService {
         this.diablo2CharacterRepository = diablo2CharacterRepository;
     }
 
-    public void ifQuoteExsistsThrowEx(String name) {
+    public void ifQuoteMpegExsistsThrowEx(String name) {
         if (diablo2QuotesRepository.findFirstByName(name).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "D2 quote already exsists");
         }
@@ -40,17 +40,19 @@ public class Diablo2QuoteService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 Character not found"));
     }
 
-    public Diablo2Quotes getRandomQuoteIfNewDay(int dayInformation) {
-        int currentDay = 0;
-        Diablo2Quotes diablo2Quotes = new Diablo2Quotes();
-        if (currentDay != dayInformation){
-            diablo2Quotes = getRandomQuote();
+    public Diablo2Quotes getDailyQuote(int dayInformation) {
+        LocalDate localDate = LocalDate.now();
+        Optional<Diablo2Quotes> firstByDaily = diablo2QuotesRepository.findFirstByDaily(LocalDate.of(localDate.getYear(), localDate.getMonth(), dayInformation));
+        if (firstByDaily.isPresent()) {
+            return firstByDaily.get();
+        } else {
+            Diablo2Quotes diablo2Quotes = getRandomQuote();
+            diablo2Quotes.setDaily(localDate);
+            return diablo2QuotesRepository.save(diablo2Quotes);
         }
-        return diablo2Quotes;
     }
 
-    public Diablo2Quotes getRandomQuote(){
-        List<Diablo2Quotes> allQuotes = diablo2QuotesRepository.getAllQuotes().orElse(Collections.emptyList());
-        return allQuotes.get((int) (Math.random() * allQuotes.size()));
+    public Diablo2Quotes getRandomQuote() {
+        return diablo2QuotesRepository.getRandomQuote().orElse(new Diablo2Quotes());
     }
 }

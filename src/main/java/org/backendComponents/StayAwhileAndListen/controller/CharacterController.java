@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/character")
@@ -25,7 +27,9 @@ public class CharacterController {
 
     @GetMapping("/allCharacters")
     private List<Diablo2Character> getAllCharacters() {
-        return characterRepository.findAll();
+        return characterRepository.findAll().stream()
+                .sorted((Comparator.comparing(Diablo2Character::getName)))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/addCharacter")
@@ -34,14 +38,14 @@ public class CharacterController {
         return characterRepository.save(diablo2Character);
     }
 
-    @GetMapping("/getCharacter/{name}")
-    private Diablo2Character getQuoteByName(@PathVariable String name) {
-        return characterRepository.findFirstByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 character not found"));
+    @GetMapping("/getCharacter/{characterId}")
+    private Diablo2Character getQuoteByName(@PathVariable long characterId) {
+        return characterRepository.findById(characterId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 character not found"));
     }
 
-    @PutMapping("/editCharacter/{id}")
-    private Diablo2Character updateDiablo2Quote(@RequestBody Diablo2Character diablo2Character, @PathVariable Long id) {
-        Diablo2Character currentCharacter = characterService.findDiablo2CharacterOrThrowEx(id);
+    @PutMapping("/editCharacter")
+    private Diablo2Character updateDiablo2Quote(@RequestBody Diablo2Character diablo2Character) {
+        Diablo2Character currentCharacter = characterService.findDiablo2CharacterOrThrowEx(diablo2Character.getId());
         currentCharacter.setName(diablo2Character.getName());
         currentCharacter.setDescription(diablo2Character.getDescription());
         return characterRepository.save(currentCharacter);
