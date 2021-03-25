@@ -1,8 +1,8 @@
-package org.backendComponents.StayAwhileAndListen.controller;
+package org.StayAwhileAndListen.controller;
 
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Character;
-import org.backendComponents.StayAwhileAndListen.repository.Diablo2CharacterRepository;
-import org.backendComponents.StayAwhileAndListen.service.Diablo2CharacterService;
+import org.StayAwhileAndListen.service.Diablo2CharacterService;
+import org.StayAwhileAndListen.model.Diablo2Character;
+import org.StayAwhileAndListen.repository.Diablo2CharacterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/character")
-@CrossOrigin(origins = "http://localhost:3000")
 public class CharacterController {
 
     private final Diablo2CharacterRepository characterRepository;

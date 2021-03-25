@@ -1,6 +1,6 @@
-package org.backendComponents.StayAwhileAndListen.repository;
+package org.StayAwhileAndListen.repository;
 
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Character;
+import org.StayAwhileAndListen.model.Diablo2Character;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,4 +1,4 @@
-package org.backendComponents.StayAwhileAndListen.service;
+package org.StayAwhileAndListen.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

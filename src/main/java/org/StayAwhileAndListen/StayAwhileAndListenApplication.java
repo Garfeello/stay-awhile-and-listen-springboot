@@ -1,4 +1,4 @@
-package org.backendComponents.StayAwhileAndListen;
+package org.StayAwhileAndListen;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,5 +8,4 @@ public class StayAwhileAndListenApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StayAwhileAndListenApplication.class, args);
 	}
-
 }

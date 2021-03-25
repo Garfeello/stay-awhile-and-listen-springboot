@@ -1,7 +1,7 @@
-package org.backendComponents.StayAwhileAndListen.service;
+package org.StayAwhileAndListen.service;
 
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Character;
-import org.backendComponents.StayAwhileAndListen.repository.Diablo2CharacterRepository;
+import org.StayAwhileAndListen.model.Diablo2Character;
+import org.StayAwhileAndListen.repository.Diablo2CharacterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

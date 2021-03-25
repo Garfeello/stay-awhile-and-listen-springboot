@@ -1,6 +1,6 @@
-package org.backendComponents.StayAwhileAndListen.repository;
+package org.StayAwhileAndListen.repository;
 
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Quotes;
+import org.StayAwhileAndListen.model.Diablo2Quotes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +13,8 @@ public interface Diablo2QuotesRepository extends JpaRepository<Diablo2Quotes, Lo
 
     @Query(value = "SELECT d FROM Diablo2Quotes d ")
     Optional<List<Diablo2Quotes>> getAllQuotes();
+
+    Optional<List<Diablo2Quotes>> getDiablo2QuotesByFavourite(boolean favourite);
 
     @Query(nativeQuery = true, value = "SELECT * FROM diablo2quotes order by RAND() LIMIT 1")
     Optional<Diablo2Quotes> getRandomQuote();

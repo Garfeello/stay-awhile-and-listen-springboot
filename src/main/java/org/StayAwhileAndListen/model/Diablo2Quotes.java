@@ -1,4 +1,4 @@
-package org.backendComponents.StayAwhileAndListen.model;
+package org.StayAwhileAndListen.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;

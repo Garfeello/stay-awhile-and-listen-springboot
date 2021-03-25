@@ -1,9 +1,9 @@
-package org.backendComponents.StayAwhileAndListen.controller;
+package org.StayAwhileAndListen.controller;
 
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Quotes;
-import org.backendComponents.StayAwhileAndListen.repository.Diablo2QuotesRepository;
-import org.backendComponents.StayAwhileAndListen.service.Diablo2QuoteService;
-import org.backendComponents.StayAwhileAndListen.service.Mp3SaveService;
+import org.StayAwhileAndListen.model.Diablo2Quotes;
+import org.StayAwhileAndListen.repository.Diablo2QuotesRepository;
+import org.StayAwhileAndListen.service.Diablo2QuoteService;
+import org.StayAwhileAndListen.service.Mp3SaveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/quotes")
-@CrossOrigin(origins = "http://localhost:3000")
 public class QuotesController {
 
     private final Diablo2QuotesRepository quotesRepository;
@@ -44,10 +43,15 @@ public class QuotesController {
     }
 
     @GetMapping("/setFavouriteQuote/{id}")
-    private void setFavouriteQuote(@PathVariable Long id){
+    private Diablo2Quotes setFavouriteQuote(@PathVariable Long id){
         Diablo2Quotes diablo2Quotes = quoteService.findDiablo2QuoteOrThrowEx(id);
         diablo2Quotes.setFavourite(!diablo2Quotes.getFavourite());
-        quotesRepository.save(diablo2Quotes);
+        return quotesRepository.save(diablo2Quotes);
+    }
+
+    @GetMapping("/favQuotes")
+    private List<Diablo2Quotes> getFavQuotes() {
+        return quotesRepository.getDiablo2QuotesByFavourite(true).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 fav empty"));
     }
 
     //CRUD
@@ -67,7 +71,7 @@ public class QuotesController {
         return quotesRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "D2 quote not found"));
     }
 
-    // in this case edit is quite redundant
+    // in this case, edit is quite redundant
 
     @DeleteMapping("/deleteQuote/{id}")
     private ResponseEntity<String> removeQuoteById(@PathVariable Long id) {

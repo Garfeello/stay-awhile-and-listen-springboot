@@ -1,6 +1,6 @@
-package org.backendComponents.StayAwhileAndListen.controller;
+package org.StayAwhileAndListen.controller;
 
-import org.backendComponents.StayAwhileAndListen.repository.Diablo2QuotesRepository;
+import org.StayAwhileAndListen.repository.Diablo2QuotesRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,6 @@ import java.io.OutputStream;
 
 @Controller
 @RequestMapping("/stayAwhileAndListen/audio")
-@CrossOrigin(origins = "http://localhost:3000")
 public class Mp3FileController {
 
     private final Diablo2QuotesRepository quotesRepository;

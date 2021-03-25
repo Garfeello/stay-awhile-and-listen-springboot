@@ -1,6 +1,6 @@
-package org.backendComponents.StayAwhileAndListen.dto;
+package org.StayAwhileAndListen.dto;
 
-import org.backendComponents.StayAwhileAndListen.model.Diablo2Character;
+import org.StayAwhileAndListen.model.Diablo2Character;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
