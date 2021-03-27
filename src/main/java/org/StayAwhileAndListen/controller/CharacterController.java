@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/character")
+@CrossOrigin(origins = {"http://localhost:3000", "http://192.168.1.27:3000"})
 public class CharacterController {
 
     private final Diablo2CharacterRepository characterRepository;

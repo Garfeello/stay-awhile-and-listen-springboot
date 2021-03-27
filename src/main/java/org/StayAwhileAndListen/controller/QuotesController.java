@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stayAwhileAndListen/quotes")
+@CrossOrigin(origins = {"http://localhost:3000", "http://192.168.1.27:3000"})
 public class QuotesController {
 
     private final Diablo2QuotesRepository quotesRepository;
@@ -28,7 +29,7 @@ public class QuotesController {
     }
 
     @GetMapping("/randomQuote")
-    private Diablo2Quotes getRandomQuote(){
+    private Diablo2Quotes getRandomQuote() {
         return quoteService.getRandomQuote();
     }
 
@@ -43,7 +44,7 @@ public class QuotesController {
     }
 
     @GetMapping("/setFavouriteQuote/{id}")
-    private Diablo2Quotes setFavouriteQuote(@PathVariable Long id){
+    private Diablo2Quotes setFavouriteQuote(@PathVariable Long id) {
         Diablo2Quotes diablo2Quotes = quoteService.findDiablo2QuoteOrThrowEx(id);
         diablo2Quotes.setFavourite(!diablo2Quotes.getFavourite());
         return quotesRepository.save(diablo2Quotes);

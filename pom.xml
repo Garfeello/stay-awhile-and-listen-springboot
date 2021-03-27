@@ -8,9 +8,9 @@
         <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.backendComponents</groupId>
+    <groupId>org.StayAwhileAndListen</groupId>
     <artifactId>stay_awhile_and_listen</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>StayAwhileAndListen</name>
     <description>Stay awhile and listen project for D2 quotes</description>
     <properties>
